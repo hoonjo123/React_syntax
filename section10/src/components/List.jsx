@@ -1,11 +1,12 @@
 import './List.css';
 import TodoItem from './TodoItem';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
+import { TodoContext } from '../App';
 
-const List = ({ todos = [], onUpdate, onDelete }) => {
-  // 기본값으로 빈 배열을 설정
+const List = () => {
+  const {todos} = useContext(TodoContext);
   const [search, setSearch] = useState('');
-
+ 
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -27,6 +28,7 @@ const List = ({ todos = [], onUpdate, onDelete }) => {
     const doneCount = todos.filter((todo) => todo.isDone).length;
     const notDoneCount = totalCount - doneCount;
 
+    
     return {
       totalCount,
       doneCount,
@@ -56,8 +58,7 @@ const List = ({ todos = [], onUpdate, onDelete }) => {
             <TodoItem
               key={todo.id}
               {...todo}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
+              
             />
           );
         })}
