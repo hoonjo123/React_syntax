@@ -27,6 +27,7 @@ const List = ({ todos = [], onUpdate, onDelete }) => {
     const doneCount = todos.filter((todo) => todo.isDone).length;
     const notDoneCount = totalCount - doneCount;
 
+    
     return {
       totalCount,
       doneCount,
