@@ -1,12 +1,12 @@
 import './List.css';
 import TodoItem from './TodoItem';
 import { useState, useMemo, useContext } from 'react';
-import { TodoContext } from '../App';
+import { TodoStateContext } from '../App';
 
 const List = () => {
-  const {todos} = useContext(TodoContext);
+  const todos = useContext(TodoStateContext);
   const [search, setSearch] = useState('');
- 
+
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -28,7 +28,6 @@ const List = () => {
     const doneCount = todos.filter((todo) => todo.isDone).length;
     const notDoneCount = totalCount - doneCount;
 
-    
     return {
       totalCount,
       doneCount,
@@ -54,13 +53,7 @@ const List = () => {
       ></input>
       <div className="todos_wrapper">
         {filteredTodos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              {...todo}
-              
-            />
-          );
+          return <TodoItem key={todo.id} {...todo} />;
         })}
       </div>
     </div>
